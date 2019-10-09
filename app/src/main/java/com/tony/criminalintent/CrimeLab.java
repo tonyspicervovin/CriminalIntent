@@ -10,7 +10,7 @@ public class CrimeLab {
 
     private static CrimeLab sCrimeLab;
     private Context mAppContext;
-
+    //populates with some test data
     private CrimeLab(Context appContext) {
         mAppContext = appContext;
         mCrimes = new ArrayList<Crime>();
@@ -21,7 +21,7 @@ public class CrimeLab {
             mCrimes.add(c);
         }
     }
-
+    //private constructer prevents more than one instance
     public static CrimeLab get(Context c) {
         if (sCrimeLab == null) {
             sCrimeLab = new CrimeLab(c.getApplicationContext());
@@ -32,6 +32,7 @@ public class CrimeLab {
     public ArrayList<Crime> getCrimes() {
         return mCrimes;
     }
+    //gets a list of crimes
     public Crime getCrime(UUID id) {
         for (Crime c : mCrimes) {
             if (c.getID().equals(id))

@@ -6,22 +6,17 @@ import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 
-public class MainActivity extends FragmentActivity {
+import java.util.UUID;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fragment);
+public class MainActivity extends SingleFragmentActivity {
 
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragmentContainter);
+   @Override
+    protected  Fragment createFragment() {
+       UUID crimeId = (UUID)getIntent()
+               .getSerializableExtra(CrimeFragment.EXTRA_CRIME_ID);
 
-        if (fragment == null){
-            fragment = new CrimeFragment();
-            fm.beginTransaction()
-                    .add(R.id.fragmentContainter, fragment)
-                    .commit();
-        }
-    }
+       return CrimeFragment.newInstance(crimeId);
+
+   }
 
 }
